@@ -1,0 +1,619 @@
+<!-- ============================================================
+  Decoding Data Science — Arshad AI · UAE Launchpad (v2)
+  Single-file landing page. Paste into a WordPress Custom HTML block.
+  No <html>/<head>/<body> wrapper needed.
+  Edit the two links in the script at the bottom: ARSHAD_URL and TOPMATE_URL.
+  ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  #dds-uae{
+    --bg:#05080f; --bg2:#0a111f; --panel:rgba(16,26,46,.62); --line:rgba(140,170,220,.16);
+    --cyan:#22d3ee; --violet:#8b5cf6; --amber:#f5a623;
+    --txt:#e7edf7; --muted:#94a3bd;
+    --grad:linear-gradient(92deg,#22d3ee 0%,#8b5cf6 100%);
+    --radius:18px;
+    font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--txt);
+    line-height:1.6; font-size:16px; margin:0; overflow-x:hidden; position:relative;
+  }
+  #dds-uae *,#dds-uae *::before,#dds-uae *::after{box-sizing:border-box;margin:0;padding:0}
+  #dds-uae img{max-width:100%;display:block}
+  #dds-uae a{text-decoration:none;color:inherit}
+  #dds-uae .wrap{max-width:1120px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+  #dds-uae section{padding:80px 0;position:relative}
+  #dds-uae h1,#dds-uae h2,#dds-uae h3{font-family:'Space Grotesk',sans-serif;line-height:1.1;letter-spacing:-.015em}
+  #dds-uae h2{font-size:clamp(28px,4.2vw,42px);margin-bottom:14px}
+  #dds-uae .kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);display:inline-flex;align-items:center;gap:10px;margin-bottom:14px}
+  #dds-uae .kicker::before{content:"";width:26px;height:1px;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+  #dds-uae .lead{color:var(--muted);font-size:17px;max-width:640px}
+  #dds-uae .center{text-align:center}
+  #dds-uae .center .lead{margin:0 auto}
+  #dds-uae .gx{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* reveal */
+  #dds-uae .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  #dds-uae .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    #dds-uae .rv{opacity:1;transform:none;transition:none}
+    #dds-uae *{animation:none!important;transition:none!important}
+  }
+
+  /* top bar */
+  #dds-uae .topbar{position:sticky;top:0;z-index:60;background:rgba(5,8,15,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap}
+  #dds-uae .topbar .lab{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+  #dds-uae .pill{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;background:var(--grad);color:#05101c;border-radius:999px;padding:7px 18px;transition:transform .2s,box-shadow .2s;white-space:nowrap}
+  #dds-uae .pill:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(34,211,238,.4)}
+
+  /* hero with aurora */
+  #dds-uae .hero{padding:110px 0 90px;overflow:hidden;background:var(--bg)}
+  #dds-uae .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;animation:float 14s ease-in-out infinite}
+  #dds-uae .o1{width:520px;height:520px;background:#22d3ee;left:-140px;top:-120px;opacity:.28}
+  #dds-uae .o2{width:600px;height:600px;background:#8b5cf6;right:-180px;top:-80px;opacity:.34;animation-delay:-5s}
+  #dds-uae .o3{width:380px;height:380px;background:#f5a623;left:45%;bottom:-220px;opacity:.12;animation-delay:-9s}
+  @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,24px)}}
+  #dds-uae .grid-bg{position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(140,170,220,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(140,170,220,.07) 1px,transparent 1px);
+    background-size:48px 48px;mask-image:radial-gradient(700px 460px at 50% 20%,#000 25%,transparent 78%)}
+  #dds-uae .scan{position:absolute;left:0;right:0;height:140px;top:-140px;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(34,211,238,.09),transparent);animation:scan 7s linear infinite}
+  @keyframes scan{to{transform:translateY(900px)}}
+  #dds-uae .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px}
+  #dds-uae .chip{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:5px 14px;color:var(--muted);background:rgba(10,17,31,.7)}
+  #dds-uae .chip.hot{border-color:rgba(34,211,238,.5);color:var(--cyan)}
+  #dds-uae .chip.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);margin-right:8px;animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(245,166,35,.55)}50%{box-shadow:0 0 0 7px rgba(245,166,35,0)}}
+  #dds-uae .hero h1{font-size:clamp(40px,7vw,76px);text-align:center;max-width:960px;margin:0 auto 20px;font-weight:700}
+  #dds-uae .hero .sub{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 34px;font-size:18px}
+  #dds-uae .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+  #dds-uae .btn{font-family:'Space Grotesk',sans-serif;font-weight:600;border-radius:14px;padding:16px 32px;font-size:16px;display:inline-flex;align-items:center;gap:10px;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:pointer}
+  #dds-uae .btn-p{background:var(--grad);color:#05101c;box-shadow:0 10px 34px rgba(34,211,238,.3)}
+  #dds-uae .btn-p:hover{transform:translateY(-2px);box-shadow:0 16px 46px rgba(139,92,246,.5)}
+  #dds-uae .btn-s{border:1px solid var(--line);color:var(--txt);background:rgba(10,17,31,.6);backdrop-filter:blur(6px)}
+  #dds-uae .btn-s:hover{border-color:rgba(34,211,238,.6);color:var(--cyan)}
+  #dds-uae .hero .note{text-align:center;font-size:12.5px;color:var(--muted);margin-top:16px}
+
+  /* stats */
+  #dds-uae .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);padding:30px 0}
+  #dds-uae .strip .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;align-items:center}
+  #dds-uae .stat{text-align:center}
+  #dds-uae .stat .n{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#fff}
+  #dds-uae .stat .t{font-size:12.5px;color:var(--muted)}
+  #dds-uae .stat img{height:58px;width:auto;margin:0 auto 4px}
+
+  /* glass cards with spotlight */
+  #dds-uae .grid{display:grid;gap:16px;margin-top:40px}
+  #dds-uae .g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  #dds-uae .g6{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+  #dds-uae .card{position:relative;background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:var(--radius);padding:24px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+  #dds-uae .card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(34,211,238,.16),transparent 65%)}
+  #dds-uae .card:hover{transform:translateY(-5px);border-color:rgba(34,211,238,.5);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+  #dds-uae .card:hover::before{opacity:1}
+  #dds-uae .card h3{font-size:18px;margin:8px 0 6px;position:relative}
+  #dds-uae .card p{font-size:14.5px;color:var(--muted);position:relative}
+  #dds-uae .no{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--amber);position:relative}
+
+  /* path */
+  #dds-uae .path{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:46px}
+  #dds-uae .node{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px;text-align:left;position:relative;transition:transform .3s,border-color .3s}
+  #dds-uae .node:hover{transform:translateY(-4px);border-color:rgba(139,92,246,.6)}
+  #dds-uae .node b{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--cyan);color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:12px;box-shadow:0 0 16px rgba(34,211,238,.35)}
+  #dds-uae .node span{display:block;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15.5px;margin-bottom:4px}
+  #dds-uae .node small{display:block;font-size:12.5px;color:var(--muted);line-height:1.45}
+
+  /* terminal */
+  #dds-uae .ai{background:radial-gradient(800px 420px at 80% 0%,rgba(139,92,246,.2),transparent 65%),radial-gradient(600px 360px at 0% 100%,rgba(34,211,238,.14),transparent 65%),var(--bg2)}
+  #dds-uae .ai .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+  #dds-uae .term{background:rgba(5,8,15,.9);border:1px solid rgba(34,211,238,.35);border-radius:18px;box-shadow:0 0 60px rgba(34,211,238,.12),0 30px 80px rgba(0,0,0,.55);overflow:hidden}
+  #dds-uae .term-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(16,26,46,.7)}
+  #dds-uae .term-bar i{width:10px;height:10px;border-radius:50%;background:#2b3a57}
+  #dds-uae .term-bar span{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);letter-spacing:.08em}
+  #dds-uae .term-body{padding:20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;min-height:300px}
+  #dds-uae .tq{color:var(--txt);margin-top:10px}
+  #dds-uae .tq::before{content:"you  > ";color:var(--amber)}
+  #dds-uae .ta{color:var(--cyan);margin:2px 0 8px}
+  #dds-uae .ta::before{content:"ai   > ";color:var(--violet)}
+  #dds-uae .caret{display:inline-block;width:7px;height:14px;background:var(--cyan);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  #dds-uae .price{display:inline-flex;align-items:baseline;gap:10px;margin:22px 0 4px}
+  #dds-uae .price b{font-family:'Space Grotesk',sans-serif;font-size:46px;line-height:1}
+  #dds-uae .price span{font-size:13px;color:var(--muted)}
+  @media(max-width:860px){#dds-uae .ai .wrap{grid-template-columns:1fr}}
+
+  /* ecosystem */
+  #dds-uae .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:40px}
+  #dds-uae .pillar{border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:linear-gradient(160deg,rgba(34,211,238,.07),rgba(16,26,46,.6) 55%);position:relative;overflow:hidden}
+  #dds-uae .pillar h3{font-size:20px;margin:6px 0}
+  #dds-uae .pillar p{font-size:14.5px;color:var(--muted)}
+  #dds-uae .partners{margin-top:34px;border:1px solid rgba(139,92,246,.4);border-radius:22px;padding:30px;background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(34,211,238,.06));text-align:center}
+  #dds-uae .partners h3{font-size:26px;margin-bottom:6px}
+  #dds-uae .partners p{color:var(--muted);max-width:620px;margin:0 auto}
+  #dds-uae .pchips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
+  #dds-uae .pchips span{font-family:'JetBrains Mono',monospace;font-size:12.5px;border:1px solid rgba(139,92,246,.5);color:#d4c8ff;border-radius:999px;padding:8px 16px;background:rgba(5,8,15,.55);transition:border-color .2s,color .2s,box-shadow .2s}
+  #dds-uae .pchips span:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 20px rgba(34,211,238,.25)}
+
+  /* events */
+  #dds-uae .cdown{display:flex;gap:12px;justify-content:center;margin:26px 0 8px;flex-wrap:wrap}
+  #dds-uae .cd-cell{background:var(--panel);border:1px solid var(--line);border-radius:14px;min-width:84px;padding:14px 10px;text-align:center}
+  #dds-uae .cd-num{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #dds-uae .cd-lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+  #dds-uae .ev .when{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan);letter-spacing:.08em;position:relative}
+
+  /* topmate band */
+  #dds-uae .band{border:1px solid rgba(34,211,238,.4);border-radius:24px;padding:38px;background:radial-gradient(500px 240px at 90% 0%,rgba(34,211,238,.18),transparent 70%),linear-gradient(135deg,rgba(16,26,46,.9),rgba(10,17,31,.9));display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+  #dds-uae .band h2{font-size:clamp(24px,3.4vw,34px);margin-bottom:6px}
+  #dds-uae .band p{color:var(--muted);max-width:560px}
+
+  /* host */
+  #dds-uae .host{display:grid;grid-template-columns:200px 1fr;gap:34px;align-items:center}
+  #dds-uae .host img{border-radius:var(--radius);border:1px solid var(--line);box-shadow:0 0 50px rgba(139,92,246,.25)}
+  @media(max-width:700px){#dds-uae .host{grid-template-columns:1fr;justify-items:center;text-align:center}#dds-uae .host img{max-width:200px}}
+
+  /* faq */
+  #dds-uae .faq-item{border:1px solid var(--line);border-radius:14px;background:var(--panel);margin-bottom:10px;overflow:hidden}
+  #dds-uae .faq-q{width:100%;text-align:left;background:none;border:none;color:var(--txt);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;padding:17px 52px 17px 22px;cursor:pointer;position:relative}
+  #dds-uae .faq-q::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--cyan);transition:transform .25s}
+  #dds-uae .faq-item.open .faq-q::after{transform:translateY(-50%) rotate(45deg)}
+  #dds-uae .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  #dds-uae .faq-a p{padding:0 22px 18px;font-size:14.5px;color:var(--muted)}
+
+  /* final */
+  #dds-uae .final{text-align:center;padding:110px 0;overflow:hidden;background:var(--bg)}
+  #dds-uae .final h2{font-size:clamp(32px,5vw,54px);max-width:820px;margin:0 auto 16px}
+  #dds-uae .final .lead{margin:0 auto 30px}
+  #dds-uae .fine{margin:26px auto 0;font-size:12px;color:var(--muted);max-width:720px}
+  #dds-uae .org{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;font-size:12.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
+
+
+  /* network */
+  #dds-uae .net{background:radial-gradient(700px 360px at 50% 0%,rgba(139,92,246,.18),transparent 65%),var(--bg)}
+  #dds-uae .nets{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:42px}
+  #dds-uae .netc{position:relative;text-align:center;padding:34px 20px;border-radius:22px;border:1px solid rgba(34,211,238,.35);background:linear-gradient(160deg,rgba(34,211,238,.1),rgba(16,26,46,.7) 60%);overflow:hidden;box-shadow:0 0 50px rgba(34,211,238,.08)}
+  #dds-uae .netc::after{content:"";position:absolute;left:20%;right:20%;bottom:0;height:2px;background:var(--grad);box-shadow:0 0 18px var(--cyan)}
+  #dds-uae .netc .big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(46px,6vw,66px);line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #dds-uae .netc .lbl{margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt)}
+  #dds-uae .netc .sub2{margin-top:6px;font-size:13.5px;color:var(--muted)}
+  #dds-uae .tiny{margin:26px auto 0;max-width:680px;text-align:center;font-size:12px;color:var(--muted)}
+
+  /* logo wall */
+  #dds-uae .logos{background:var(--bg2);overflow:hidden;padding:76px 0}
+  #dds-uae .mq{position:relative;margin-top:26px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+  #dds-uae .mq-track{display:flex;gap:16px;width:max-content;animation:mq 46s linear infinite}
+  #dds-uae .mq.rev .mq-track{animation-direction:reverse;animation-duration:54s}
+  #dds-uae .mq:hover .mq-track{animation-play-state:paused}
+  @keyframes mq{to{transform:translateX(-50%)}}
+  #dds-uae .lg{flex:0 0 auto;width:190px;height:90px;border-radius:16px;background:linear-gradient(160deg,#f6f9fe,#e3ebf7);border:1px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;padding:14px 18px;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .25s,box-shadow .25s}
+  #dds-uae .lg:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(34,211,238,.3)}
+  #dds-uae .lg img{max-height:56px;max-width:100%;width:auto;object-fit:contain}
+  #dds-uae .lg b{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;color:#0b1426;letter-spacing:-.01em;text-align:center}
+
+  /* directory */
+  #dds-uae .tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:34px}
+  #dds-uae .tab{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.05em;color:var(--muted);background:rgba(10,17,31,.7);border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;transition:all .2s}
+  #dds-uae .tab:hover{color:var(--cyan);border-color:rgba(34,211,238,.5)}
+  #dds-uae .tab.on{color:#05101c;background:var(--grad);border-color:transparent;font-weight:700}
+  #dds-uae .dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:26px;min-height:120px}
+  #dds-uae .dchip{display:block;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--panel);font-size:14px;font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--txt);transition:border-color .2s,transform .2s,box-shadow .2s;animation:dIn .35s ease both}
+  #dds-uae a.dchip:hover{border-color:rgba(34,211,238,.6);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.4);color:var(--cyan)}
+  #dds-uae .dchip small{display:block;margin-top:3px;font-family:'Inter',sans-serif;font-weight:400;font-size:12px;color:var(--muted);line-height:1.4}
+  @keyframes dIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  #dds-uae .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:34px}
+  #dds-uae .stp{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--panel)}
+  #dds-uae .stp b{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);letter-spacing:.12em;display:block;margin-bottom:6px}
+  #dds-uae .stp p{font-size:14px;color:var(--muted)}
+  #dds-uae .ptl{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:34px}
+  #dds-uae .ptl a{display:block;padding:20px;border-radius:var(--radius);border:1px solid rgba(34,211,238,.3);background:linear-gradient(160deg,rgba(34,211,238,.08),rgba(16,26,46,.7));transition:transform .25s,border-color .25s}
+  #dds-uae .ptl a:hover{transform:translateY(-4px);border-color:var(--cyan)}
+  #dds-uae .ptl h3{font-size:17px;margin-bottom:4px}
+  #dds-uae .ptl p{font-size:13.5px;color:var(--muted)}
+  #dds-uae .ptl span{display:block;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--cyan);letter-spacing:.08em}
+
+  #dds-uae .float-cta{display:none;position:fixed;left:14px;right:14px;bottom:14px;z-index:70}
+  #dds-uae .float-cta a{display:flex;justify-content:center;background:var(--grad);color:#05101c;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15.5px;padding:15px;border-radius:14px;box-shadow:0 12px 36px rgba(34,211,238,.45)}
+  @media(max-width:680px){#dds-uae .float-cta{display:block}#dds-uae section{padding:60px 0}#dds-uae .hero{padding:72px 0 60px}#dds-uae .band{padding:26px}}
+</style>
+
+<div id="dds-uae">
+
+  <div class="topbar">
+    <span class="lab">Arshad AI · UAE Launchpad</span>
+    <a class="pill" href="#" data-arshad target="_blank" rel="noopener">Enter Arshad AI →</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+    <div class="grid-bg"></div><div class="scan"></div>
+    <div class="wrap">
+      <div class="chips rv">
+        <span class="chip hot">For tech founders and every founder</span>
+        <span class="chip live">Part of the DDS Business Circle</span>
+        <span class="chip">Startups · SMEs · Global founders</span>
+      </div>
+      <h1 class="rv">Founders, launch in the UAE. <span class="gx">Ask before you spend.</span></h1>
+      <p class="sub rv">Arshad AI guides tech founders and every kind of founder through UAE setup and the regional tech ecosystem, backed by 120+ investors, 200+ mentors and shortlisted partners.</p>
+      <div class="cta-row rv">
+        <a class="btn btn-p" href="#" data-arshad target="_blank" rel="noopener">Enter Arshad AI →</a>
+        <a class="btn btn-s" href="#" data-topmate target="_blank" rel="noopener">Book a 1:1 on Topmate</a>
+      </div>
+      <p class="note rv">Educational guidance only, not legal, tax or immigration advice.</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="strip">
+    <div class="wrap rv">
+      <div class="stat"><div class="n">211K+</div><div class="t">Followers across platforms</div></div>
+      <div class="stat"><div class="n">50+</div><div class="t">Countries</div></div>
+      <div class="stat"><div class="n">1,200+</div><div class="t">Free workshops</div></div>
+      <div class="stat"><div class="n">21 yrs</div><div class="t">Industry experience</div></div>
+      <div class="stat"><img src="https://raw.githubusercontent.com/Decoding-Data-Science/airesidency/main/cpdmember-logo-1-300x275.webp" alt="CPD Member logo" loading="lazy"><div class="t">CPD Approved Provider</div></div>
+    </div>
+  </div>
+
+
+  <!-- NETWORK -->
+  <section class="net">
+    <div class="wrap">
+      <div class="center rv">
+        <div class="kicker">The founder network</div>
+        <h2>Your network is <span class="gx">part of the stack.</span></h2>
+        <p class="lead">Tech founders and founders of every kind get access to a community built for the region.</p>
+      </div>
+      <div class="nets">
+        <div class="netc rv"><div class="big"><span data-count="120">120</span>+</div><div class="lbl">Investors</div><div class="sub2">In the DDS community</div></div>
+        <div class="netc rv"><div class="big"><span data-count="200">200</span>+</div><div class="lbl">Mentors</div><div class="sub2">Across tech, business and growth</div></div>
+        <div class="netc rv"><div class="big"><span data-count="1000" data-comma="1">1,000</span>+</div><div class="lbl">Startup founders</div><div class="sub2">Registered on the platform</div></div>
+      </div>
+      <p class="tiny rv">Network access does not guarantee funding, mentorship or partnerships.</p>
+    </div>
+  </section>
+
+  <!-- LOGOS -->
+  <section class="logos">
+    <div class="wrap center rv">
+      <div class="kicker">Ecosystem</div>
+      <h2>Our <span class="gx">ecosystem.</span></h2>
+    </div>
+    <div class="mq rv" id="uaeMq1"><div class="mq-track"></div></div>
+    <div class="mq rev rv" id="uaeMq2"><div class="mq-track"></div></div>
+    <p class="tiny rv" style="margin-top:22px">Logos and names are trademarks of their respective owners. Inclusion does not imply endorsement of, or by, Decoding Data Science.</p>
+  </section>
+
+  <!-- MISTAKES -->
+  <section>
+    <div class="wrap">
+      <div class="center rv">
+        <div class="kicker">Avoid the costly ones</div>
+        <h2>Six mistakes. <span class="gx">All avoidable.</span></h2>
+      </div>
+      <div class="grid g3">
+        <div class="card rv"><div class="no">01</div><h3>Zone chosen on price</h3><p>Choose by who pays you and where, not by the cheapest licence.</p></div>
+        <div class="card rv"><div class="no">02</div><h3>Loose licence activities</h3><p>Activities decide approvals, invoicing and what a bank will accept.</p></div>
+        <div class="card rv"><div class="no">03</div><h3>Bank account left for last</h3><p>Prepare the bank file while the licence is being issued.</p></div>
+        <div class="card rv"><div class="no">04</div><h3>Tax and VAT ignored</h3><p>Corporate tax is 0% up to AED 375,000 and 9% above. Free zone firms still register and file.</p></div>
+        <div class="card rv"><div class="no">05</div><h3>Wrong office</h3><p>Mainland needs a registered tenancy. Free zones often include a flexi-desk.</p></div>
+        <div class="card rv"><div class="no">06</div><h3>No legal or audit review</h3><p>Fixing a weak structure after revenue or funding costs far more.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATH -->
+  <section style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="center rv">
+        <div class="kicker">The path</div>
+        <h2>Seven steps, <span class="gx">right order.</span></h2>
+      </div>
+      <div class="path">
+        <div class="node rv"><b>01</b><span>Model</span><small>Who pays you, from where</small></div>
+        <div class="node rv"><b>02</b><span>Jurisdiction</span><small>Free zone, mainland or both</small></div>
+        <div class="node rv"><b>03</b><span>Licence</span><small>Activities and approvals</small></div>
+        <div class="node rv"><b>04</b><span>Visa and ID</span><small>Establishment card, medical, Emirates ID</small></div>
+        <div class="node rv"><b>05</b><span>Office and home</span><small>Flexi-desk or Ejari tenancy</small></div>
+        <div class="node rv"><b>06</b><span>Bank</span><small>Corporate account file</small></div>
+        <div class="node rv"><b>07</b><span>Tax and network</span><small>Registrations, events, intros</small></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- DIRECTORY -->
+  <section>
+    <div class="wrap">
+      <div class="center rv">
+        <div class="kicker">UAE founder ecosystem directory</div>
+        <h2>Everyone you need, <span class="gx">in one place.</span></h2>
+        <p class="lead">Free zones, incubators, accounting, legal, banks, workspaces, tenders, events and regulators. Listings only; DDS does not endorse any entity.</p>
+      </div>
+      <div class="tabs rv" id="uaeTabs"></div>
+      <div class="dgrid" id="uaeDir"></div>
+      <p class="tiny rv" style="margin-top:22px">Directory listings are for information. Check each organisation's official site for current terms, fees and eligibility.</p>
+    </div>
+  </section>
+
+  <!-- TENDERS -->
+  <section style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="center rv">
+        <div class="kicker">Sell to government and big corporates</div>
+        <h2>Vendor registration and RFPs, <span class="gx">explained.</span></h2>
+        <p class="lead">Each buyer has its own gate. Registering with one does not cover the others.</p>
+      </div>
+      <div class="ptl">
+        <a class="rv" href="https://esupply.dubai.gov.ae" target="_blank" rel="noopener"><h3>Dubai eSupply</h3><p>Procurement portal for 40+ Dubai Government entities.</p><span>OPEN PORTAL →</span></a>
+        <a class="rv" href="https://www.adgpg.gov.ae" target="_blank" rel="noopener"><h3>Abu Dhabi ADGPG</h3><p>One registration for Abu Dhabi Government entities.</p><span>OPEN PORTAL →</span></a>
+        <a class="rv" href="https://mof.gov.ae" target="_blank" rel="noopener"><h3>Federal Supplier Register</h3><p>Federal ministries and authorities, via UAE PASS.</p><span>OPEN PORTAL →</span></a>
+        <a class="rv" href="https://www.adnoc.ae" target="_blank" rel="noopener"><h3>ADNOC Supplier Hub</h3><p>ADNOC Group procurement, with a new ICV model from 1 Nov 2026.</p><span>OPEN PORTAL →</span></a>
+        <a class="rv" href="https://moiat.gov.ae" target="_blank" rel="noopener"><h3>MoIAT ICV</h3><p>In-Country Value certificate, valid 14 months.</p><span>OPEN PORTAL →</span></a>
+      </div>
+      <div class="steps">
+        <div class="stp rv"><b>STEP 01</b><p>Right licence and activities, then your corporate tax number and VAT where required.</p></div>
+        <div class="stp rv"><b>STEP 02</b><p>Prepare the pack: licence, IDs, bank letter, tax certificates, profile and audited financials.</p></div>
+        <div class="stp rv"><b>STEP 03</b><p>Register on each portal separately, then complete each buyer's prequalification.</p></div>
+        <div class="stp rv"><b>STEP 04</b><p>Get ICV certified if you target ADNOC, federal or government-owned buyers.</p></div>
+        <div class="stp rv"><b>STEP 05</b><p>Respond to every RFx fully and early. Deliver only against a purchase order.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARSHAD AI -->
+  <section class="ai">
+    <div class="wrap">
+      <div class="rv">
+        <div class="kicker">Arshad AI</div>
+        <h2>The right questions, <span class="gx">before the wrong spend.</span></h2>
+        <p class="lead">It does not give you a template answer. It asks what decides your structure, then tells you what to ask each free zone, bank and adviser.</p>
+        <div class="price"><b class="gx">$99</b><span>founder access · inside the DDS Business Circle</span></div>
+        <div class="cta-row" style="justify-content:flex-start;margin-top:18px">
+          <a class="btn btn-p" href="#" data-arshad target="_blank" rel="noopener">Enter Arshad AI →</a>
+        </div>
+      </div>
+      <div class="term rv">
+        <div class="term-bar"><i></i><i></i><i></i><span>arshad-ai · uae-launchpad</span></div>
+        <div class="term-body" id="uaeTerm">
+          <div class="tq" data-text="My customers are in Saudi Arabia and the UK. Free zone or mainland?"></div>
+          <div class="ta" data-text="Start with who pays you. Mostly abroad: a free zone can fit. Selling to UAE customers: plan a mainland route. What is your expected annual revenue?"></div>
+          <div class="tq" data-text="What will the bank ask me?"></div>
+          <div class="ta" data-text="Ownership, activity, expected volumes and source of funds. Bring a one-page model and your licence documents."></div>
+          <span class="caret"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECOSYSTEM + PARTNERS -->
+  <section>
+    <div class="wrap">
+      <div class="center rv">
+        <div class="kicker">DDS Business Circle</div>
+        <h2>One ecosystem. <span class="gx">One stop.</span></h2>
+        <p class="lead">Arshad AI is part of the DDS Business Circle, the DDS ecosystem for founders and businesses building in the region.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar rv"><div class="no">ASK</div><h3>Arshad AI</h3><p>Guided questions on setup, banking, visas and events.</p></div>
+        <div class="pillar rv"><div class="no">CONNECT</div><h3>Community and events</h3><p>A 211K+ community and the regional tech events DDS works with.</p></div>
+        <div class="pillar rv"><div class="no">EXECUTE</div><h3>Shortlisted partners</h3><p>Vetted by DDS, so you do not have to search alone.</p></div>
+      </div>
+      <div class="partners rv">
+        <h3>Shortlisted by DDS. One stop for everything.</h3>
+        <p>From the first licence to the first customer, one trusted network.</p>
+        <div class="pchips"><span>Legal</span><span>Audit and Tax</span><span>Licensing and PRO</span><span>Banking</span><span>Workspace</span><span>Go-to-market</span></div>
+        <div class="cta-row" style="margin-top:26px"><a class="btn btn-p" href="#" data-arshad target="_blank" rel="noopener">Join the Business Circle →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="center rv">
+        <div class="kicker">Where to show up</div>
+        <h2>Events that <span class="gx">move the needle.</span></h2>
+        <p class="lead">Go as a visitor first, apply for startup showcases before buying a stand, and measure meetings, not footfall.</p>
+      </div>
+      <div class="cdown rv">
+        <div class="cd-cell"><div class="cd-num" id="cdD">--</div><div class="cd-lab">Days</div></div>
+        <div class="cd-cell"><div class="cd-num" id="cdH">--</div><div class="cd-lab">Hours</div></div>
+        <div class="cd-cell"><div class="cd-num" id="cdM">--</div><div class="cd-lab">Min</div></div>
+        <div class="cd-cell"><div class="cd-num" id="cdS">--</div><div class="cd-lab">Sec</div></div>
+      </div>
+      <p class="center rv" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase">to GITEX GLOBAL 2026 · 7 Dec</p>
+      <div class="grid g3">
+        <a class="card ev rv" href="https://www.gitex.com" target="_blank" rel="noopener"><div class="when">7-11 DEC 2026</div><h3>GITEX GLOBAL</h3><p>Buyers, partners and visibility at scale. Summit 7 Dec at DWTC.</p><p style="margin-top:8px;color:var(--cyan);font-size:12px">Expo City Dubai (Summit 7 Dec at DWTC)</p></a>
+        <a class="card ev rv" href="https://www.expandnorthstar.com" target="_blank" rel="noopener"><div class="when">8-10 DEC 2026</div><h3>Expand North Star</h3><p>The startup and investor arm of GITEX. Free startup pass, pods and pitch competition.</p><p style="margin-top:8px;color:var(--cyan);font-size:12px">Expo City Dubai</p></a>
+        <a class="card ev rv" href="https://stepconference.com/dubai/2027/" target="_blank" rel="noopener"><div class="when">3-4 FEB 2027</div><h3>Step Dubai</h3><p>Startup showcase by application, pitch competition and investor meetings.</p><p style="margin-top:8px;color:var(--cyan);font-size:12px">Dubai Internet City</p></a>
+        <a class="card ev rv" href="https://www.gulfood.com" target="_blank" rel="noopener"><div class="when">15-19 MAR 2027</div><h3>Gulfood</h3><p>Food-tech startup zones and global buyers.</p><p style="margin-top:8px;color:var(--cyan);font-size:12px">DWTC and Dubai Exhibition Centre</p></a>
+        <a class="card ev rv" href="https://www.aieverythingabudhabi.com" target="_blank" rel="noopener"><div class="when">11-12 MAY 2027</div><h3>Ai Everything Abu Dhabi</h3><p>Abu Dhabi's AI show. Exhibitor and startup participation.</p><p style="margin-top:8px;color:var(--cyan);font-size:12px">ADNEC, Abu Dhabi</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPMATE -->
+  <section style="padding:70px 0">
+    <div class="wrap">
+      <div class="band rv">
+        <div>
+          <div class="kicker">Prefer a human?</div>
+          <h2>Book a 1:1 with Mohammad.</h2>
+          <p>A 30-minute founder session on product, AI, go-to-market and your UAE next steps.</p>
+        </div>
+        <a class="btn btn-p" href="#" data-topmate target="_blank" rel="noopener">Book on Topmate →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOST -->
+  <section style="padding:30px 0 70px">
+    <div class="wrap">
+      <div class="host rv">
+        <img src="https://raw.githubusercontent.com/Decoding-Data-Science/airesidency/main/Arshad_photo.png" alt="Mohammad Arshad, Founder, Decoding Data Science" loading="lazy">
+        <div>
+          <div class="kicker">Your guide</div>
+          <h2 style="font-size:30px">Mohammad Arshad</h2>
+          <p class="lead" style="max-width:none">Founder of Decoding Data Science. Building in Dubai since 2020, with 21 years across MAF, Accenture, HP and Dell, and keynotes at LEAP, GITEX and the Global AI Show.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:var(--bg2)">
+    <div class="wrap" style="max-width:820px">
+      <div class="center rv"><div class="kicker">FAQ</div><h2>Quick answers</h2></div>
+      <div style="margin-top:30px" class="rv" id="uaeFaq">
+        <div class="faq-item"><button class="faq-q">Is this legal or tax advice?</button><div class="faq-a"><p>No. It is educational and helps you ask better questions. For legal, tax, audit and immigration decisions, use a licensed professional, such as our shortlisted partners.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Free zone or mainland?</button><div class="faq-a"><p>It depends on who your customers are. Free zones suit businesses selling mainly abroad or to other free zone firms. Mainland suits selling to UAE customers and tenders. Many founders use both over time.</p></div></div>
+        <div class="faq-item"><button class="faq-q">What does Arshad AI access include?</button><div class="faq-a"><p>Guided Q&amp;A on UAE setup and the tech ecosystem inside the DDS Business Circle. Full access terms are shown at checkout.</p></div></div>
+        <div class="faq-item"><button class="faq-q">How current is this?</button><div class="faq-a"><p>Public guidance as of 23 November 2026. Rules, fees and event dates change, so confirm with the relevant authority before you act.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final">
+    <div class="orb o1"></div><div class="orb o2"></div><div class="grid-bg"></div>
+    <div class="wrap">
+      <div class="rv">
+        <h2>Your UAE launch, <span class="gx">de-risked.</span></h2>
+        <p class="lead">Enter Arshad AI, join the DDS Business Circle, and meet shortlisted partners when you are ready.</p>
+        <div class="cta-row">
+          <a class="btn btn-p" style="font-size:18px;padding:18px 40px" href="#" data-arshad target="_blank" rel="noopener">Enter Arshad AI →</a>
+          <a class="btn btn-s" style="font-size:18px;padding:18px 36px" href="#" data-topmate target="_blank" rel="noopener">Book on Topmate</a>
+        </div>
+        <p class="fine">Educational guidance only; not legal, tax, audit or immigration advice. Partner services are provided by independent firms. Figures and dates reflect public sources as of 23 November 2026 and may change. Logos and names are trademarks of their respective owners; inclusion does not imply endorsement.</p>
+        <div class="org">decodingdatascience.com · DDS Business Circle · © 2026 Decoding Data Science</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="float-cta"><a href="#" data-arshad target="_blank" rel="noopener">Enter Arshad AI</a></div>
+</div>
+
+<script>
+(function(){
+  /* ---------- Links: edit these two lines ---------- */
+  var ARSHAD_URL='https://decodingdatascience.com/businesscircle/';
+  var TOPMATE_URL='https://topmate.io/mohamad_arshad/1481062?utm_source=public_profile&utm_campaign=mohamad_arshad';
+  document.querySelectorAll('#dds-uae [data-arshad]').forEach(function(a){a.setAttribute('href',ARSHAD_URL)});
+  document.querySelectorAll('#dds-uae [data-topmate]').forEach(function(a){a.setAttribute('href',TOPMATE_URL)});
+
+  function pad(n){return (n<10?'0':'')+n}
+  /* ---------- Real countdown: GITEX GLOBAL Summit, 7 Dec 2026 00:00 GST ---------- */
+  var T=new Date('2026-12-07T00:00:00+04:00').getTime();
+  function tick(){
+    var d=Math.max(0,T-Date.now()), g=function(i){return document.getElementById(i)};
+    if(g('cdD')){g('cdD').textContent=pad(Math.floor(d/864e5));g('cdH').textContent=pad(Math.floor(d%864e5/36e5));g('cdM').textContent=pad(Math.floor(d%36e5/6e4));g('cdS').textContent=pad(Math.floor(d%6e4/1e3));}
+  }
+  tick(); setInterval(tick,1000);
+
+  /* ---------- FAQ ---------- */
+  document.querySelectorAll('#uaeFaq .faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      var item=q.parentElement,a=item.querySelector('.faq-a'),open=item.classList.contains('open');
+      document.querySelectorAll('#uaeFaq .faq-item.open').forEach(function(o){o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null});
+      if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}
+    });
+  });
+
+  /* ---------- Card spotlight ---------- */
+  document.querySelectorAll('#dds-uae .card').forEach(function(c){
+    c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')});
+  });
+
+  /* ---------- Reveal ---------- */
+  var els=document.querySelectorAll('#dds-uae .rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.12});
+    els.forEach(function(el){io.observe(el)});
+  } else {els.forEach(function(el){el.classList.add('in')})}
+
+
+  /* ---------- Count-up ---------- */
+  document.querySelectorAll('#dds-uae [data-count]').forEach(function(el){
+    var end=parseInt(el.getAttribute('data-count'),10), comma=el.hasAttribute('data-comma');
+    function fmt(n){return comma?n.toLocaleString('en-US'):String(n)}
+    if(!('IntersectionObserver' in window)||(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)){el.textContent=fmt(end);return}
+    el.textContent=fmt(0);
+    new IntersectionObserver(function(es,ob){
+      if(!es[0].isIntersecting)return; ob.disconnect();
+      var t0=null,dur=1600;
+      (function step(ts){t0=t0||ts;var p=Math.min(1,(ts-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmt(Math.round(end*e));if(p<1)requestAnimationFrame(step)})(performance.now());
+    },{threshold:.4}).observe(el);
+  });
+
+  /* ---------- Logo wall ----------
+     To add a logo for GITEX, in5 or AI Everything: upload the file to the WordPress
+     media library and paste its URL into the empty src below. Until then the name shows as text. */
+  var U='https://decodingdatascience.com/wp-content/uploads/';
+  var LOGOS=[
+    {n:'GITEX GLOBAL',s:''},
+    {n:'in5',s:''},
+    {n:'AI Everything',s:''},
+    {n:'JetBrains',s:U+'2026/03/jetbrainlogo-300x95.png'},
+    {n:'CodersHQ',s:U+'2024/12/codershq-300x100.jpeg'},
+    {n:'ENS',s:U+'2026/11/ENS-Logo-black-300x173.png'},
+    {n:'American University of Emirates',s:U+'2024/12/american-university-of-emirates-300x197.png'},
+    {n:'Sandooq Al Watan',s:U+'2024/12/sandooq-al-watan-300x103.png'},
+    {n:'GAIS',s:U+'2026/06/GAIS-Logo-250X250.png'},
+    {n:'Applied AI',s:U+'2024/07/applied_ai-logo-black-300x77.png'},
+    {n:'Falcons.AI',s:U+'2024/05/WhatsApp-Image-2024-05-09-at-10.52.34-AM-300x300.jpeg'},
+    {n:'Trellisoft',s:U+'2024/05/Trellissoft-Logo-300x150.jpeg'},
+    {n:'Syzygy',s:U+'2024/08/syzygy-large-300x79.png'},
+    {n:'Future 10x',s:U+'2024/07/future-10x-logo-final.png'},
+    {n:'Kent',s:U+'2024/08/Kent-logo-300x210.png'}
+  ];
+  function tile(l){
+    var d=document.createElement('div'); d.className='lg'; d.title=l.n;
+    function txt(){d.innerHTML='';var b=document.createElement('b');b.textContent=l.n;d.appendChild(b)}
+    if(l.s){var im=new Image();im.alt=l.n;im.loading='lazy';im.onerror=txt;im.src=l.s;d.appendChild(im)}else{txt()}
+    return d;
+  }
+  function fill(id,list){
+    var tr=document.querySelector('#'+id+' .mq-track'); if(!tr)return;
+    list.concat(list).forEach(function(l){tr.appendChild(tile(l))});
+  }
+  fill('uaeMq1',LOGOS.slice(0,8));
+  fill('uaeMq2',LOGOS.slice(8).concat(LOGOS.slice(0,2)));
+
+
+  /* ---------- Directory (listings only; links only where the official URL was verified) ---------- */
+  var DIR=[{"c": "Free zones", "n": "DMCC", "w": "Dubai free zone for trading, commodities, crypto/Web3 and general services", "u": "https://dmcc.ae"}, {"c": "Free zones", "n": "Dubai Internet City (TECOM)", "w": "Main Dubai tech cluster for software, AI and SaaS; home of in5 Tech and Step Dubai", "u": "https://dic.ae"}, {"c": "Free zones", "n": "Dubai Media City / Studio City / Science Park (TECOM)", "w": "Media, content, creator, life-science and health-tech clusters", "u": ""}, {"c": "Free zones", "n": "Dubai Silicon Oasis (DSO) / Dtec", "w": "Integrated tech park and free zone; Dtec is its startup campus", "u": ""}, {"c": "Free zones", "n": "DIFC", "w": "Common-law financial free zone for fintech, funds, family offices and AI firms", "u": "https://www.difc.ae"}, {"c": "Free zones", "n": "Meydan Free Zone", "w": "Low-cost Dubai licence, digital setup, flexi-desk", "u": "https://www.meydanfz.ae"}, {"c": "Free zones", "n": "IFZA", "w": "Low-cost Dubai licences for consultancies and service firms", "u": ""}, {"c": "Free zones", "n": "Dubai South / Dubai CommerCity", "w": "Logistics, aviation and e-commerce free zones", "u": ""}, {"c": "Free zones", "n": "JAFZA (DP World)", "w": "Trading, manufacturing and logistics next to Jebel Ali port", "u": ""}, {"c": "Free zones", "n": "ADGM", "w": "Abu Dhabi common-law financial centre for fintech, funds and tech", "u": "https://www.adgm.com"}, {"c": "Free zones", "n": "Masdar City Free Zone", "w": "Abu Dhabi zone for clean-tech, AI, space and sustainability startups", "u": ""}, {"c": "Free zones", "n": "twofour54", "w": "Abu Dhabi media, gaming and content free zone", "u": ""}, {"c": "Free zones", "n": "KEZAD (AD Ports)", "w": "Industrial, logistics and manufacturing zones", "u": ""}, {"c": "Free zones", "n": "RAKEZ", "w": "Low-cost multi-sector licences, industrial land, e-commerce", "u": ""}, {"c": "Free zones", "n": "SHAMS (Sharjah Media City)", "w": "Low-cost media, creator and e-commerce licences", "u": ""}, {"c": "Free zones", "n": "SPC Free Zone (Sharjah)", "w": "Low-cost publishing, e-commerce and general trading licences", "u": "https://www.spcfz.ae"}, {"c": "Free zones", "n": "SRTI Park (Sharjah)", "w": "R&D and deep-tech park", "u": ""}, {"c": "Free zones", "n": "Ajman Free Zone", "w": "Budget licences with instalment plans", "u": ""}, {"c": "Free zones", "n": "Invest in Dubai (DET mainland licence)", "w": "Mainland licence: trade anywhere onshore and bid for government contracts", "u": ""}, {"c": "Incubators and VCs", "n": "Hub71", "w": "Abu Dhabi ecosystem: up to AED 250k in-kind plus AED 250k cash via SAFE; AI, climate, digital assets and life-science tracks", "u": "https://www.hub71.com"}, {"c": "Incubators and VCs", "n": "in5 (TECOM)", "w": "Incubator with Tech, Media, Design and Science centres; subsidised desks and licence support", "u": ""}, {"c": "Incubators and VCs", "n": "Dubai Future Foundation", "w": "Dubai Future Accelerators, Area 2071, Dubai Future Labs; runs Dubai AI Week", "u": "https://www.dubaifuture.ae"}, {"c": "Incubators and VCs", "n": "DIFC Innovation Hub (FinTech Hive)", "w": "Fintech and AI accelerator; subsidised innovation licences", "u": ""}, {"c": "Incubators and VCs", "n": "Dubai SME", "w": "Support for Emirati-owned SMEs, procurement set-asides, programmes", "u": ""}, {"c": "Incubators and VCs", "n": "Dubai Chambers", "w": "Chamber membership, matchmaking, startup programmes", "u": "https://www.dubaichamber.com"}, {"c": "Incubators and VCs", "n": "Mohammed bin Rashid Innovation Fund (MBRIF)", "w": "Federal loan guarantees and accelerator for innovative companies", "u": ""}, {"c": "Incubators and VCs", "n": "Khalifa Fund for Enterprise Development", "w": "Abu Dhabi funding and support for Emirati entrepreneurs", "u": ""}, {"c": "Incubators and VCs", "n": "Sandooq Al Watan (National Incubator Network)", "w": "Private-sector national fund for Emirati talent and incubation", "u": ""}, {"c": "Incubators and VCs", "n": "Sheraa", "w": "Sharjah government startup centre and accelerator", "u": ""}, {"c": "Incubators and VCs", "n": "AstroLabs", "w": "Market entry, licensing and coworking for tech firms", "u": ""}, {"c": "Incubators and VCs", "n": "Flat6Labs", "w": "Seed-stage accelerator and investor across MENA", "u": ""}, {"c": "Incubators and VCs", "n": "Techstars", "w": "Global accelerator; MENA programmes vary by year", "u": ""}, {"c": "Incubators and VCs", "n": "500 Global", "w": "Global accelerator and VC; MENA programmes vary by year", "u": ""}, {"c": "Incubators and VCs", "n": "Global Ventures", "w": "Dubai-based VC, seed to Series B", "u": ""}, {"c": "Incubators and VCs", "n": "BECO Capital", "w": "Dubai-based early-stage VC", "u": ""}, {"c": "Incubators and VCs", "n": "Shorooq Partners", "w": "Abu Dhabi VC and private credit", "u": ""}, {"c": "Incubators and VCs", "n": "Wamda", "w": "Regional VC and ecosystem media", "u": ""}, {"c": "Incubators and VCs", "n": "Applied AI Company (AAICO)", "w": "G42-backed Abu Dhabi AI firm; ran a hackathon with DDS (2024)", "u": ""}, {"c": "Accounting and tax", "n": "Deloitte Middle East", "w": "Audit, tax, corporate tax; MoIAT ICV certifying body", "u": "https://www.deloitte.com/middle-east"}, {"c": "Accounting and tax", "n": "PwC Middle East", "w": "Audit, tax, deals", "u": ""}, {"c": "Accounting and tax", "n": "EY", "w": "Audit, tax, transactions", "u": ""}, {"c": "Accounting and tax", "n": "KPMG Lower Gulf", "w": "Audit, tax, advisory", "u": ""}, {"c": "Accounting and tax", "n": "Grant Thornton UAE", "w": "Mid-tier audit and tax for SMEs and scale-ups", "u": ""}, {"c": "Accounting and tax", "n": "BDO UAE", "w": "Mid-tier audit and tax", "u": ""}, {"c": "Accounting and tax", "n": "RSM UAE", "w": "Mid-tier audit, tax and ICV", "u": ""}, {"c": "Accounting and tax", "n": "Crowe UAE", "w": "Audit and tax", "u": ""}, {"c": "Accounting and tax", "n": "Finanshels", "w": "Startup-focused bookkeeping, corporate tax and VAT filing", "u": "https://finanshels.com"}, {"c": "Accounting and tax", "n": "Naqood", "w": "Accounting platform and corporate tax learning centre", "u": "https://naqood.ae"}, {"c": "Accounting and tax", "n": "Zoho Books (MEA)", "w": "Cloud accounting with UAE VAT and CT guidance", "u": "https://www.zoho.com/en-mea"}, {"c": "Accounting and tax", "n": "Xero", "w": "Cloud accounting used by UAE SMEs", "u": "https://www.xero.com"}, {"c": "Accounting and tax", "n": "QuickBooks", "w": "Cloud accounting used by UAE SMEs", "u": ""}, {"c": "Legal and setup", "n": "Al Tamimi & Company", "w": "Largest regional law firm: corporate, VC, IP, employment", "u": ""}, {"c": "Legal and setup", "n": "BSA Ahmad Bin Hezeem & Associates", "w": "Corporate, tech and disputes", "u": ""}, {"c": "Legal and setup", "n": "Hadef & Partners", "w": "UAE corporate and commercial law", "u": ""}, {"c": "Legal and setup", "n": "Galadari Advocates", "w": "Litigation, corporate, IP", "u": ""}, {"c": "Legal and setup", "n": "Afridi & Angell", "w": "Corporate, finance, regulatory", "u": ""}, {"c": "Legal and setup", "n": "Clyde & Co", "w": "International firm: corporate, disputes, insurance", "u": ""}, {"c": "Legal and setup", "n": "Bird & Bird", "w": "Tech, IP and data protection", "u": ""}, {"c": "Legal and setup", "n": "Virtuzone", "w": "Business setup and PRO services", "u": ""}, {"c": "Legal and setup", "n": "Creation Business Consultants", "w": "Business setup and PRO", "u": ""}, {"c": "Legal and setup", "n": "Shuraa Business Setup", "w": "Business setup and PRO", "u": "https://www.shuraa.com"}, {"c": "Legal and setup", "n": "PRO Partner Group", "w": "Mainland setup and local-sponsor services", "u": ""}, {"c": "Legal and setup", "n": "TAMM (Abu Dhabi)", "w": "Government one-stop portal for Abu Dhabi services", "u": ""}, {"c": "Banks and payments", "n": "Emirates NBD", "w": "Corporate and SME accounts, trade finance", "u": "https://www.emiratesnbd.com"}, {"c": "Banks and payments", "n": "Wio Bank (Wio Business)", "w": "Digital SME bank, app-based account opening", "u": "https://wio.io"}, {"c": "Banks and payments", "n": "Mashreq (NEOBiz)", "w": "Digital SME banking", "u": "https://www.mashreq.com"}, {"c": "Banks and payments", "n": "RAKBANK", "w": "SME and business banking", "u": ""}, {"c": "Banks and payments", "n": "ADCB", "w": "Business banking", "u": ""}, {"c": "Banks and payments", "n": "First Abu Dhabi Bank (FAB)", "w": "Corporate and SME banking", "u": ""}, {"c": "Banks and payments", "n": "Commercial Bank of Dubai (CBD)", "w": "SME and corporate banking", "u": ""}, {"c": "Banks and payments", "n": "Zand", "w": "Digital bank for corporates and retail", "u": ""}, {"c": "Banks and payments", "n": "Dubai Islamic Bank", "w": "Islamic business banking", "u": ""}, {"c": "Banks and payments", "n": "ADIB", "w": "Islamic business banking", "u": ""}, {"c": "Banks and payments", "n": "Network International", "w": "Card acquiring and payment gateway", "u": ""}, {"c": "Banks and payments", "n": "Checkout.com", "w": "Online payment gateway for SaaS and e-commerce", "u": ""}, {"c": "Banks and payments", "n": "Stripe", "w": "Online payment gateway", "u": ""}, {"c": "Banks and payments", "n": "Telr", "w": "Regional payment gateway", "u": ""}, {"c": "Banks and payments", "n": "PayTabs", "w": "Regional payment gateway", "u": ""}, {"c": "Banks and payments", "n": "Amazon Payment Services", "w": "Regional payment gateway", "u": ""}, {"c": "Banks and payments", "n": "Tabby", "w": "Buy-now-pay-later for merchants", "u": ""}, {"c": "Banks and payments", "n": "Tamara", "w": "Buy-now-pay-later for merchants", "u": ""}, {"c": "Workspaces", "n": "Dtec (Dubai Silicon Oasis)", "w": "Startup campus coworking", "u": ""}, {"c": "Workspaces", "n": "Regus / Spaces (IWG)", "w": "Serviced and virtual offices, Ejari-eligible offices", "u": ""}, {"c": "Workspaces", "n": "Servcorp", "w": "Premium serviced and virtual offices", "u": ""}, {"c": "Tenders and RFPs", "n": "Dubai eSupply", "w": "Official Dubai Government procurement portal, 40+ entities", "u": "https://esupply.dubai.gov.ae"}, {"c": "Tenders and RFPs", "n": "Dubai Government Procurement overview", "w": "Policies and links to eSupply and DEWA platform", "u": "https://www.dubai.ae/government-procurement"}, {"c": "Tenders and RFPs", "n": "Abu Dhabi Government Procurement Gate (ADGPG)", "w": "One registration for all Abu Dhabi Government entities", "u": "https://www.adgpg.gov.ae"}, {"c": "Tenders and RFPs", "n": "Federal Supplier Register (MoF)", "w": "Federal ministries and authorities; UAE PASS login", "u": "https://mof.gov.ae"}, {"c": "Tenders and RFPs", "n": "ADNOC Supplier Hub", "w": "ADNOC Group procurement", "u": "https://www.adnoc.ae"}, {"c": "Tenders and RFPs", "n": "MoIAT National ICV Programme", "w": "ICV certificate for ADNOC, federal and government-linked buyers", "u": "https://moiat.gov.ae"}, {"c": "Events", "n": "GITEX GLOBAL", "w": "7-11 Dec 2026; Summit 7 Dec at DWTC, expo 8-11 Dec at Expo City Dubai", "u": "https://www.gitex.com"}, {"c": "Events", "n": "Expand North Star", "w": "8-10 Dec 2026, Expo City Dubai; free startup pass, pods, pitch competition", "u": ""}, {"c": "Events", "n": "Step Dubai", "w": "3-4 Feb 2027, Dubai Internet City; startup showcase by application", "u": "https://stepconference.com/dubai/2027/"}, {"c": "Events", "n": "Gulfood", "w": "15-19 Mar 2027, DWTC and Dubai Exhibition Centre; food-tech startup zones", "u": "https://www.gulfood.com"}, {"c": "Events", "n": "Ai Everything Abu Dhabi", "w": "11-12 May 2027, ADNEC Abu Dhabi", "u": "https://www.aieverythingabudhabi.com"}, {"c": "Events", "n": "LEAP (Saudi Arabia, for context)", "w": "12-15 Apr 2027, Riyadh", "u": "https://onegiantleap.com"}, {"c": "Events", "n": "GISEC GLOBAL", "w": "4-6 May 2027, Expo City Dubai (secondary source)", "u": ""}, {"c": "Events", "n": "Arabian Travel Market", "w": "3-6 May 2027, DWTC", "u": ""}, {"c": "Events", "n": "AIM Congress", "w": "12-14 Apr 2027, DWTC (secondary source)", "u": ""}, {"c": "Events", "n": "Dubai FinTech Summit", "w": "DIFC; 2027 dates not announced", "u": ""}, {"c": "Events", "n": "Global AI Show", "w": "VAP Group; Abu Dhabi edition 18-19 Nov 2026 (secondary)", "u": ""}, {"c": "Events", "n": "Abu Dhabi Finance Week", "w": "ADGM flagship finance week, usually December; 2026 dates not verified here", "u": ""}, {"c": "Government", "n": "Federal Tax Authority (EmaraTax)", "w": "Corporate tax and VAT registration and filing", "u": "https://tax.gov.ae"}, {"c": "Government", "n": "UAE Government portal (u.ae) and UAE PASS", "w": "Official services portal and national digital ID", "u": "https://u.ae"}, {"c": "Government", "n": "Ministry of Economy", "w": "Federal economic policy and trademarks", "u": "https://www.moet.gov.ae"}, {"c": "Government", "n": "Ministry of Finance", "w": "Federal procurement platform and MBRIF", "u": "https://mof.gov.ae"}, {"c": "Government", "n": "Dubai DET", "w": "Mainland licensing in Dubai", "u": ""}, {"c": "Government", "n": "Abu Dhabi DED", "w": "Abu Dhabi licensing", "u": ""}, {"c": "Government", "n": "Abu Dhabi Investment Office (ADIO)", "w": "Investment and innovation incentives", "u": ""}, {"c": "Government", "n": "ICP (Emirates ID and residency)", "w": "Emirates ID and residency outside Dubai", "u": ""}, {"c": "Government", "n": "GDRFA Dubai", "w": "Dubai residency visas", "u": ""}, {"c": "Government", "n": "MOHRE", "w": "Work permits, WPS, Emiratisation", "u": ""}, {"c": "Government", "n": "Central Bank of the UAE", "w": "Banking, payments and stored-value licensing", "u": ""}, {"c": "Government", "n": "Securities and Commodities Authority (SCA)", "w": "Onshore capital-markets regulation", "u": ""}, {"c": "Government", "n": "VARA", "w": "Virtual-asset licensing in Dubai (outside DIFC)", "u": ""}, {"c": "Government", "n": "DFSA", "w": "Financial regulator inside DIFC", "u": ""}];
+  var TABS=["Free zones", "Incubators and VCs", "Accounting and tax", "Legal and setup", "Banks and payments", "Workspaces", "Tenders and RFPs", "Events", "Government"];
+  var tabsEl=document.getElementById('uaeTabs'),dirEl=document.getElementById('uaeDir');
+  function showTab(t){
+    dirEl.innerHTML='';
+    DIR.filter(function(x){return x.c===t}).forEach(function(x,i){
+      var el=document.createElement(x.u?'a':'div'); el.className='dchip'; el.style.animationDelay=(i*25)+'ms';
+      if(x.u){el.href=x.u;el.target='_blank';el.rel='noopener nofollow'}
+      el.textContent=x.n; var sm=document.createElement('small'); sm.textContent=x.w; el.appendChild(sm); dirEl.appendChild(el);
+    });
+    [].forEach.call(tabsEl.children,function(b){b.classList.toggle('on',b.textContent===t)});
+  }
+  if(tabsEl&&dirEl){
+    TABS.forEach(function(t){var b=document.createElement('button');b.className='tab';b.type='button';b.textContent=t;b.addEventListener('click',function(){showTab(t)});tabsEl.appendChild(b)});
+    showTab(TABS[0]);
+  }
+
+  /* ---------- Terminal typing (text is in the HTML, so it still reads without JS) ---------- */
+  var term=document.getElementById('uaeTerm');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(term&&!reduce&&'IntersectionObserver' in window){
+    var lines=[].slice.call(term.querySelectorAll('[data-text]'));
+    lines.forEach(function(l){l.textContent=''});
+    var started=false;
+    new IntersectionObserver(function(es,ob){
+      if(!es[0].isIntersecting||started)return; started=true; ob.disconnect();
+      var li=0;
+      (function next(){
+        if(li>=lines.length)return;
+        var el=lines[li++],t=el.getAttribute('data-text'),i=0,fast=el.classList.contains('tq');
+        (function type(){
+          el.textContent=t.slice(0,++i);
+          if(i<t.length){setTimeout(type,fast?22:14)}else{setTimeout(next,fast?350:700)}
+        })();
+      })();
+    },{threshold:.3}).observe(term);
+  }
+})();
+</script>
